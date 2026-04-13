@@ -8,8 +8,8 @@ function  App() {
       setUserData(response.data);
   }
   return (
-    <div className='bg-black h-screen  text-white'>
-    <button onClick={getData} className='bg-green-600 rounded text-white m-4 py-2 px-2 '>Get data</button>
+    <div className='bg-black h-screen   text-white'>
+    <button onClick={getData} className='bg-green-600 rounded flex flex-wrap text-white m-4 py-2 px-2 '>Get data</button>
     </div> 
   )   
 }
