@@ -3,14 +3,14 @@ import React , { useEffect, useState } from 'react'
 
 function  App() {
   const [userData,setUserData] = useState([]);
-  const [index,setIndex] = useState(0);
+  const [index,setIndex] = useState(1);
   const getData = async ()=>{
-      const response = await axios.get('https://picsum.photos/v2/list?page=2&limit=100')
+      const response = await axios.get(`https://picsum.photos/v2/list?page=${index}&limit=100`)
       setUserData(response.data);
 
    }
    useEffect(()=>{
-    getData();  
+    getData() 
    },[index])
 
   let printuserData = <h3 className='text-gray-500 text-xs absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 font-semibold'>...loading</h3>
@@ -38,6 +38,8 @@ function  App() {
         }}>
         Prev
         </button>
+        <h4>Page {index}</h4>
+        <button className="bg-amber-400 text-sm cursor-pointer active:scale-95 text-black rounded px-4 py-2 font-semibold">Next</button>
       </div>
     </div> 
   )   
