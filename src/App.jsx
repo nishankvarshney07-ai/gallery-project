@@ -4,6 +4,7 @@ import Card from './components/Card'
 
 function  App() {
   const [userData,setUserData] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
   const [index,setIndex] = useState(1);
   const getData = async ()=>{
       const response = await axios.get(`https://picsum.photos/v2/list?page=${index}&limit=10`)
@@ -12,13 +13,15 @@ function  App() {
    }
    useEffect(()=>{
     getData() 
-   },[index])
+   },[index])                                                             
 
   let printuserData = <h3 className='text-gray-500 text-xs absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 font-semibold'>...loading</h3>
    if (userData.length>0){
    printuserData = userData.map((elem,idx)=>{
    
-   return <div key={idx}>
+   return <div key={idx} onClick={()=>{
+    setSelectedImage(elem)
+   }}>
     <Card elem={elem} />
    </div>
 })
@@ -49,6 +52,15 @@ function  App() {
         }}
         >Next</button>
       </div>
+      {selectedImage && (
+        <div
+        className='fixed top-0 left-0 w-full h-full bg-black/80 flex justify-center items-center z-50'
+        onClick={()=> setSelectedImage(null)}
+        >
+          <img src={selectedImage.download_url}
+          className='max-w-[90%] max-h-[90%] rounded-lg'/>
+        </div>
+      )}
     </div> 
   )   
 }
